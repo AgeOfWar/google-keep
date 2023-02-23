@@ -1,6 +1,8 @@
 <script>
 	import Search from 'svelte-material-icons/Magnify.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
+
+	let value;
 </script>
 
 <div
@@ -13,12 +15,15 @@
 	/>
 	<input
 		type="text"
-		class="bg-[#f1f3f4] outline-none font-['Google_Sans'] text-lg flex-grow"
+		class="bg-[#f1f3f4] outline-none font-googlesans text-lg flex-grow"
 		placeholder="Cerca"
+		bind:value
 	/>
-	<Close
-		class="box-content h-auto p-2 m-[3px] hover:bg-[#e3e5e6] rounded-full cursor-pointer"
-		size="24"
-		color="#5f6368"
-	/>
+	{#if value !== undefined}
+		<Close
+			class="box-content h-auto p-2 m-[3px] hover:bg-[#e3e5e6] rounded-full cursor-pointer"
+			size="24"
+			color="#5f6368"
+		/>
+	{/if}
 </div>
