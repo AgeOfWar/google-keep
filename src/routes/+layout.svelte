@@ -12,8 +12,8 @@
 <div class="flex flex-col h-full">
 	<nav>
 		<div class="flex items-center border-b-2 h-12 p-2 box-content justify-between">
-			<div class="flex items-center flex-grow h-full">
-				<div class="flex items-center justify-start w-[242px]">
+			<div class="flex items-center flex-grow h-full flex-shrink">
+				<div class="flex items-center justify-start w-[242px] flex-shrink-0">
 					<Menu
 						class="box-content p-3 mx-1 hover:bg-[#e3e5e6] rounded-full cursor-pointer"
 						size="24"
