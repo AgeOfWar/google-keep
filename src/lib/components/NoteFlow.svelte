@@ -6,6 +6,6 @@
 
 <div class="flex flex-wrap gap-4 px-6">
 	{#each notes as note}
-		<Note {note} />
+		<Note {note} onremove={() => (notes = notes.filter((n) => n !== note))} />
 	{/each}
 </div>

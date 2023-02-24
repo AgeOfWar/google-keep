@@ -4,12 +4,15 @@
 	import Palette from 'svelte-material-icons/PaletteOutline.svelte';
 	import Image from 'svelte-material-icons/ImageOutline.svelte';
 	import Archive from 'svelte-material-icons/ArchiveOutline.svelte';
-	import DotsVertical from 'svelte-material-icons/DotsVertical.svelte';
 	import ColorPicker from './ColorPicker.svelte';
+	import Options from './Options.svelte';
+	import Option from './Option.svelte';
 
 	export let note;
+	export let onremove;
 	let hideOptions = true;
 	let colorPickerVisible;
+	let optionsVisible;
 </script>
 
 <div
@@ -29,7 +32,9 @@
 		{/if}
 	</div>
 	<div
-		class="flex justify-between mt-8 mx-[-8px] {hideOptions && !colorPickerVisible
+		class="flex justify-between mt-8 mx-[-8px] {hideOptions &&
+		!colorPickerVisible &&
+		!optionsVisible
 			? 'invisible'
 			: ''}"
 	>
@@ -65,11 +70,14 @@
 			size="16"
 			color="#202124"
 		/>
-		<DotsVertical
-			class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
-			size="16"
-			color="#202124"
-		/>
+		<Options bind:visible={optionsVisible} width="200px">
+			<Option onclick={onremove}>Elimina nota</Option>
+			<Option>Aggiungi etichetta</Option>
+			<Option>Aggiungi disegno</Option>
+			<Option>Crea una copia</Option>
+			<Option>Mostra caselle di controllo</Option>
+			<Option>Copia in Documenti Google</Option>
+		</Options>
 	</div>
 	<ColorPicker
 		bind:visible={colorPickerVisible}
