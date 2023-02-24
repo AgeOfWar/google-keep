@@ -12,17 +12,28 @@
 	import ArrowURightTop from 'svelte-material-icons/ArrowURightTop.svelte';
 	import PinOutline from 'svelte-material-icons/PinOutline.svelte';
 
-	let focused = false;
+	export let onwrite;
 
-	function init(title) {
-		title.focus();
+	let focused = false;
+	let title;
+	let note;
+
+	function handleClose() {
+		focused = false;
+		if (!title && !note) return;
+		onwrite({
+			title: title ?? null,
+			note: note ?? null
+		});
+		title = '';
+		note = '';
 	}
 </script>
 
 <div
-	class="self-center w-[600px] px-4 py-3 shadow-md shadow-[#00000050] rounded-md my-7 flex flex-col gap-6"
+	class="self-center w-[600px] px-4 py-3 shadow-md shadow-[#00000050] rounded-md my-8 flex flex-col gap-6"
 	use:clickOutside
-	on:clickOutside={() => (focused = false)}
+	on:click_outside={handleClose}
 >
 	{#if focused}
 		<div class="flex items-center">
@@ -30,7 +41,7 @@
 				class="outline-none placeholder-[#4c4c4c] flex-grow"
 				type="text"
 				placeholder="Titolo"
-				use:init
+				bind:value={title}
 			/>
 			<PinOutline
 				class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
@@ -41,6 +52,8 @@
 		<TextAreaAutosize
 			clazz="outline-none placeholder-[#4c4c4c] resize-none m-0 min-h-full h-auto text-sm"
 			placeholder="Scrivi una nota..."
+			autofocus="true"
+			bind:value={note}
 		/>
 		<div class="flex justify-between items-center">
 			<div class="ml-[-6px] flex items-center gap-4">
@@ -85,7 +98,7 @@
 					color="#202124"
 				/>
 			</div>
-			<div>Chiudi</div>
+			<button class="px-6 py-[6px] hover:bg-[#f9f9f9]" on:click={handleClose}>Chiudi</button>
 		</div>
 	{:else}
 		<input
