@@ -15,7 +15,7 @@
 	/>
 	<input
 		type="text"
-		class="bg-[#f1f3f4] outline-none font-googlesans text-lg flex-grow"
+		class="bg-[#f1f3f4] outline-none font-googlesans placeholder:font-googlesans placeholder:font-extralight text-lg flex-grow"
 		placeholder="Cerca"
 		bind:value
 	/>

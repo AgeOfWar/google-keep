@@ -7,10 +7,13 @@
 	import DotsVertical from 'svelte-material-icons/DotsVertical.svelte';
 
 	export let note;
+	let hideOptions = true;
 </script>
 
 <div
 	class="w-[240px] h-min rounded-lg border hover:drop-shadow border-[#e2e2e2] px-4 py-2 flex flex-col justify-between"
+	on:mouseenter={() => (hideOptions = false)}
+	on:mouseleave={() => (hideOptions = true)}
 >
 	<div class="flex flex-col break-words">
 		{#if note.title}
@@ -20,7 +23,7 @@
 			<span class={note.title ? 'pt-2' : ''}>{note.note}</span>
 		{/if}
 	</div>
-	<div class="flex justify-between mt-8 mx-[-8px]">
+	<div class="flex justify-between mt-8 mx-[-8px] {hideOptions ? 'invisible' : ''}">
 		<BellPlus
 			class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
 			size="16"
