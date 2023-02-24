@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="w-[240px] rounded-lg border hover:drop-shadow border-[#e2e2e2] px-4 py-2 flex flex-col justify-between"
+	class="w-[240px] h-min rounded-lg border hover:drop-shadow border-[#e2e2e2] px-4 py-2 flex flex-col justify-between"
 >
 	<div class="flex flex-col break-words">
 		{#if note.title}
