@@ -2,7 +2,7 @@
 
 [x] Creare note
 [ ] Scrivere note anche immagini
-[ ] Filtrare note
+[x] Filtrare note
 [x] Cambiare colore alla nota
 [x] Cancellare una nota
 [ ] Riarrangiamento note drag & drop
