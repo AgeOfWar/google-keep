@@ -1,7 +1,7 @@
 <script>
 	import '../app.postcss';
-	import Side from './Side.svelte';
-	import SearchBar from './SearchBar.svelte';
+	import Side from '$lib/components/Side.svelte';
+	import SearchBar from '$lib/components/SearchBar.svelte';
 	import Logo from '$lib/images/Logo.png';
 	import Menu from 'svelte-material-icons/Menu.svelte';
 	import Reload from 'svelte-material-icons/Reload.svelte';

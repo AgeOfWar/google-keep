@@ -1,5 +1,5 @@
 <script>
-	import WriteField from './WriteField.svelte';
+	import WriteField from '$lib/components/WriteField.svelte';
 
 	let notes = [];
 	let pinnedNotes = [];
