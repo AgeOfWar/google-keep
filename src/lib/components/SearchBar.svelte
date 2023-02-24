@@ -2,7 +2,7 @@
 	import Search from 'svelte-material-icons/Magnify.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 
-	let value;
+	export let value;
 </script>
 
 <div
@@ -20,10 +20,12 @@
 		bind:value
 	/>
 	{#if value !== undefined}
-		<Close
-			class="box-content h-auto p-2 m-[3px] hover:bg-[#e3e5e6] rounded-full cursor-pointer"
-			size="24"
-			color="#5f6368"
-		/>
+		<button on:click={() => (value = '')}>
+			<Close
+				class="box-content h-auto p-2 m-[3px] hover:bg-[#e3e5e6] rounded-full cursor-pointer"
+				size="24"
+				color="#5f6368"
+			/>
+		</button>
 	{/if}
 </div>

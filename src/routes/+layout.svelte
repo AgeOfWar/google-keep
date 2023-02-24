@@ -1,5 +1,6 @@
 <script>
 	import '../app.postcss';
+	import { searchInput } from '$lib/components/stores.js';
 	import Side from '$lib/components/Side.svelte';
 	import SearchBar from '$lib/components/SearchBar.svelte';
 	import Logo from '$lib/images/Logo.png';
@@ -10,6 +11,9 @@
 	import DotsGrid from 'svelte-material-icons/DotsGrid.svelte';
 
 	let collapseSide = true;
+	let search;
+
+	$: searchInput.set(search ?? '');
 </script>
 
 <div class="flex flex-col h-full">
@@ -29,7 +33,7 @@
 						Keep
 					</a>
 				</div>
-				<SearchBar />
+				<SearchBar bind:value={search} />
 			</div>
 			<div class="flex items-center h-full">
 				<Reload
@@ -66,6 +70,6 @@
 				</a>
 			{/if}
 		</div>
-		<slot {collapseSide} />
+		<slot />
 	</div>
 </div>
