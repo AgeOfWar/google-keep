@@ -11,98 +11,115 @@
 	import ArrowULeftTop from 'svelte-material-icons/ArrowULeftTop.svelte';
 	import ArrowURightTop from 'svelte-material-icons/ArrowURightTop.svelte';
 	import PinOutline from 'svelte-material-icons/PinOutline.svelte';
+	import ColorPicker from './ColorPicker.svelte';
 
 	export let onwrite;
 
 	let focused = false;
 	let title;
 	let note;
+	let color;
+	let colorPickerVisible;
 
 	function handleClose() {
 		focused = false;
-		if (!title && !note) return;
-		onwrite({
-			title: title ?? null,
-			note: note ?? null
-		});
+		colorPickerVisible = false;
+		if (title || note) {
+			onwrite({
+				title: title ?? null,
+				note: note ?? null,
+				color: color ?? null
+			});
+		}
 		title = '';
 		note = '';
+		color = null;
 	}
 </script>
 
 <div
-	class="self-center w-[600px] px-4 py-3 shadow-md shadow-[#00000050] rounded-md my-8 flex flex-col gap-6"
+	class="self-center w-[600px] px-4 py-3 shadow-[0_0_7px_#00000050] rounded-md mb-8 mt-4 flex flex-col gap-6"
+	style="background-color: {color ?? 'white'};"
 	use:clickOutside
 	on:click_outside={handleClose}
 >
 	{#if focused}
 		<div class="flex items-center">
 			<input
-				class="outline-none placeholder-[#4c4c4c] flex-grow"
+				class="outline-none placeholder-[#4c4c4c] flex-grow bg-transparent"
 				type="text"
 				placeholder="Titolo"
 				bind:value={title}
 			/>
 			<PinOutline
-				class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
+				class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
 				size="24"
 				color="#202124"
 			/>
 		</div>
 		<TextAreaAutosize
-			clazz="outline-none placeholder-[#4c4c4c] resize-none m-0 min-h-full h-auto text-sm"
+			class="outline-none placeholder-[#4c4c4c] resize-none m-0 min-h-full h-auto text-sm"
 			placeholder="Scrivi una nota..."
 			autofocus="true"
 			bind:value={note}
 		/>
-		<div class="flex justify-between items-center">
-			<div class="ml-[-6px] flex items-center gap-4">
-				<BellPlus
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<AccountPlus
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<PaletteOutline
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<ImageOutline
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<Archive
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<DotsVertical
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<ArrowULeftTop
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
-				<ArrowURightTop
-					class="box-content p-2 cursor-pointer rounded-full hover:bg-[#e3e5e6]"
-					size="16"
-					color="#202124"
-				/>
+		<div class="flex flex-col">
+			<div class="flex justify-between items-center">
+				<div class="ml-[-6px] flex items-center gap-4">
+					<BellPlus
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+					<AccountPlus
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+					<button on:click={() => (colorPickerVisible = true)}>
+						<PaletteOutline
+							class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+							size="16"
+							color="#202124"
+						/>
+					</button>
+					<ImageOutline
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+					<Archive
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+					<DotsVertical
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+					<ArrowULeftTop
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+					<ArrowURightTop
+						class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+						size="16"
+						color="#202124"
+					/>
+				</div>
+				<button class="px-6 py-[6px] hover:bg-[#00000020]" on:click={handleClose}>Chiudi</button>
 			</div>
-			<button class="px-6 py-[6px] hover:bg-[#f9f9f9]" on:click={handleClose}>Chiudi</button>
+			<ColorPicker
+				bind:visible={colorPickerVisible}
+				onselect={(c) => (color = c)}
+				currentValue={color}
+			/>
 		</div>
 	{:else}
 		<input
-			class="outline-none placeholder-[#4c4c4c]"
+			class="outline-none placeholder-[#4c4c4c] placeholder:font-semibold"
 			type="text"
 			placeholder="Scrivi una nota..."
 			on:focus={() => (focused = true)}
