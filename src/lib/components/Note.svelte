@@ -20,14 +20,11 @@
 
 	$: if (images) {
 		upload(images[0]);
-	} else {
-		note.image = null;
 	}
 
 	async function upload(image) {
 		const base64 = await fileToBase64(image);
 		note.image = base64;
-		console.log(base64);
 	}
 </script>
 
