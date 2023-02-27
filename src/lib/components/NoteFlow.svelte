@@ -3,8 +3,6 @@
 	import Note from './Note.svelte';
 
 	export let notes;
-	let search = '';
-	searchInput.subscribe((s) => (search = s));
 
 	function swapNotes(i, j) {
 		let temp = notes[i];
@@ -33,7 +31,7 @@
 
 <div class="flex flex-wrap gap-4 px-6">
 	{#each notes as note, i}
-		{#if note.title?.includes(search) || note.note?.includes(search)}
+		{#if note.title?.includes($searchInput) || note.note?.includes($searchInput)}
 			<Note
 				{note}
 				on:dragenter={(e) => ondragenter(i, e)}
