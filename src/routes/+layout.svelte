@@ -20,7 +20,7 @@
 	<nav>
 		<div class="flex items-center border-b-2 h-12 p-2 box-content justify-between">
 			<div class="flex items-center flex-grow h-full flex-shrink">
-				<div class="flex items-center justify-start w-[242px] flex-shrink-0">
+				<div class="flex items-center justify-start md:w-[242px] flex-shrink-0">
 					<button on:click={() => (collapseSide ^= true)}>
 						<Menu
 							class="box-content p-3 mx-1 hover:bg-[#e3e5e6] rounded-full cursor-pointer"
@@ -28,7 +28,10 @@
 							color="#5f6368"
 						/>
 					</button>
-					<a href="/" class="font-googlesans text-[22px] text-[#5f6368] flex items-center">
+					<a
+						href="/"
+						class="font-googlesans text-[22px] text-[#5f6368] items-center hidden md:flex"
+					>
 						<img class="w-[40px] h-[40px] pr-[8px] box-content" src={Logo} alt="Keep" />
 						Keep
 					</a>

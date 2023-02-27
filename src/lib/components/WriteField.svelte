@@ -56,7 +56,7 @@
 </script>
 
 <div
-	class="self-center w-[600px] px-4 py-3 shadow-[0_0_7px_#00000050] rounded-md mb-8 mt-4 flex flex-col gap-6"
+	class="self-center max-w-[600px] px-4 py-3 shadow-[0_0_7px_#00000050] rounded-md mb-8 mt-4 flex flex-col gap-6 w-full"
 	style="background-color: {color ?? 'white'};"
 	use:clickOutside
 	on:click_outside={handleClose}
@@ -70,6 +70,7 @@
 				class="outline-none placeholder-[#4c4c4c] flex-grow bg-transparent"
 				type="text"
 				placeholder="Titolo"
+				size="1"
 				bind:value={title}
 			/>
 			<PinOutline
