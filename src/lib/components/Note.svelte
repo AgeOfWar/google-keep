@@ -12,6 +12,7 @@
 	export let note;
 	export let onremove;
 	export let dragged;
+	export let onmodify;
 	let hideOptions = true;
 	let colorPickerVisible;
 	let optionsVisible;
@@ -25,6 +26,7 @@
 	async function upload(image) {
 		const base64 = await fileToBase64(image);
 		note.image = base64;
+		onmodify();
 	}
 </script>
 
@@ -100,7 +102,10 @@
 	</div>
 	<ColorPicker
 		bind:visible={colorPickerVisible}
-		onselect={(color) => (note.color = color)}
+		onselect={(color) => {
+			note.color = color;
+			onmodify();
+		}}
 		currentValue={note.color}
 	/>
 	<input

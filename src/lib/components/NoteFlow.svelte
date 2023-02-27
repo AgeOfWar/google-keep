@@ -3,6 +3,7 @@
 	import Note from './Note.svelte';
 
 	export let notes;
+	export let onmodify;
 
 	function swapNotes(i, j) {
 		let temp = notes[i];
@@ -39,6 +40,7 @@
 				on:dragend={(e) => ondragend(i, e)}
 				onremove={() => (notes = notes.filter((n) => n !== note))}
 				dragged={draggedNote === i}
+				{onmodify}
 			/>
 		{/if}
 	{/each}
