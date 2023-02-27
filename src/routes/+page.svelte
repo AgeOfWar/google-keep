@@ -24,9 +24,9 @@
 		<WriteField onwrite={(note) => (notes = [...notes, note])} />
 		{#if pinnedNotes.length > 0}
 			<span class="text-xs text-[#5f6368] font-semibold ml-10 mb-2">APPUNTATE</span>
-			<NoteFlow notes={pinnedNotes} onmodify={() => (pinnedNotes = pinnedNotes)} />
+			<NoteFlow bind:notes={pinnedNotes} />
 			<span class="text-xs text-[#5f6368] font-semibold ml-10 mb-2 mt-16">ALTRE</span>
 		{/if}
-		<NoteFlow {notes} onmodify={() => (notes = notes)} />
+		<NoteFlow bind:notes />
 	</div>
 </main>

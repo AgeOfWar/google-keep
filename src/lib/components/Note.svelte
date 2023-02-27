@@ -1,4 +1,5 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
 	import { fileToBase64 } from './images';
 	import BellPlus from 'svelte-material-icons/BellPlusOutline.svelte';
 	import AccountPlus from 'svelte-material-icons/AccountPlusOutline.svelte';
@@ -9,10 +10,11 @@
 	import Options from './Options.svelte';
 	import Option from './Option.svelte';
 
+	const dispatch = createEventDispatcher();
+
 	export let note;
-	export let onremove;
 	export let dragged;
-	export let onmodify;
+
 	let hideOptions = true;
 	let colorPickerVisible;
 	let optionsVisible;
@@ -26,7 +28,7 @@
 	async function upload(image) {
 		const base64 = await fileToBase64(image);
 		note.image = base64;
-		onmodify();
+		dispatch('modify');
 	}
 </script>
 
@@ -92,7 +94,7 @@
 			color="#202124"
 		/>
 		<Options bind:visible={optionsVisible} width="200px">
-			<Option onclick={onremove}>Elimina nota</Option>
+			<Option onclick={() => dispatch('remove')}>Elimina nota</Option>
 			<Option>Aggiungi etichetta</Option>
 			<Option>Aggiungi disegno</Option>
 			<Option>Crea una copia</Option>
@@ -104,7 +106,7 @@
 		bind:visible={colorPickerVisible}
 		onselect={(color) => {
 			note.color = color;
-			onmodify();
+			dispatch('modify');
 		}}
 		currentValue={note.color}
 	/>
