@@ -1,4 +1,5 @@
 <script>
+	import { fileToBase64 } from './images';
 	import BellPlus from 'svelte-material-icons/BellPlusOutline.svelte';
 	import AccountPlus from 'svelte-material-icons/AccountPlusOutline.svelte';
 	import Palette from 'svelte-material-icons/PaletteOutline.svelte';
@@ -14,6 +15,20 @@
 	let hideOptions = true;
 	let colorPickerVisible;
 	let optionsVisible;
+	let filePicker;
+	let images;
+
+	$: if (images) {
+		upload(images[0]);
+	} else {
+		note.image = null;
+	}
+
+	async function upload(image) {
+		const base64 = await fileToBase64(image);
+		note.image = base64;
+		console.log(base64);
+	}
 </script>
 
 <div
@@ -31,6 +46,9 @@
 	on:drag
 >
 	<div class="flex flex-col break-words">
+		{#if note.image}
+			<img class="ml-[-16px] mt-[-8px] min-w-[238px] rounded-t-lg" src={note.image} alt />
+		{/if}
 		{#if note.title}
 			<span class="select-none font-semibold">{note.title}</span>
 		{/if}
@@ -55,24 +73,20 @@
 			size="16"
 			color="#202124"
 		/>
-		<button
-			class="h-fit"
-			on:click={() => {
-				colorPickerVisible = true;
-				console.log(colorPickerVisible);
-			}}
-		>
+		<button class="h-fit" on:click={() => (colorPickerVisible = true)}>
 			<Palette
 				class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
 				size="16"
 				color="#202124"
 			/>
 		</button>
-		<Image
-			class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
-			size="16"
-			color="#202124"
-		/>
+		<button class="h-fit" on:click={() => filePicker.click()}>
+			<Image
+				class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
+				size="16"
+				color="#202124"
+			/>
+		</button>
 		<Archive
 			class="box-content p-2 cursor-pointer rounded-full hover:bg-[#00000020]"
 			size="16"
@@ -91,5 +105,12 @@
 		bind:visible={colorPickerVisible}
 		onselect={(color) => (note.color = color)}
 		currentValue={note.color}
+	/>
+	<input
+		bind:this={filePicker}
+		bind:files={images}
+		type="file"
+		class="hidden"
+		accept="image/png, image/jpeg"
 	/>
 </div>
