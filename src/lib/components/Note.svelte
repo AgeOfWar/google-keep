@@ -10,6 +10,7 @@
 
 	export let note;
 	export let onremove;
+	export let dragged;
 	let hideOptions = true;
 	let colorPickerVisible;
 	let optionsVisible;
@@ -19,16 +20,22 @@
 	class="w-[240px] h-min rounded-lg border hover:drop-shadow {colorPickerVisible
 		? 'drop-shadow'
 		: ''} border-[#e2e2e2] px-4 py-2 flex flex-col justify-between"
-	style="background-color: {note.color ?? 'white'};"
+	style="background-color: {note.color ?? 'white'}; cursor: {dragged ? 'move' : 'pointer'};"
+	draggable="true"
 	on:mouseenter={() => (hideOptions = false)}
 	on:mouseleave={() => (hideOptions = true)}
+	on:dragenter
+	on:dragleave
+	on:dragstart
+	on:dragend
+	on:drag
 >
 	<div class="flex flex-col break-words">
 		{#if note.title}
-			<span class="font-semibold">{note.title}</span>
+			<span class="select-none font-semibold">{note.title}</span>
 		{/if}
 		{#if note.note}
-			<span class={note.title ? 'pt-2' : ''}>{note.note}</span>
+			<span class="select-none {note.title ? 'pt-2' : ''}">{note.note}</span>
 		{/if}
 	</div>
 	<div
