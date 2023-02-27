@@ -56,6 +56,7 @@
 			color="#202124"
 		/>
 		<button
+			class="h-fit"
 			on:click={() => {
 				colorPickerVisible = true;
 				console.log(colorPickerVisible);
