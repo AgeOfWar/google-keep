@@ -20,7 +20,6 @@
 
 	function ondragenter(i) {
 		if (draggedNote !== i) {
-			console.log(draggedNote + ' ' + i);
 			swapNotes(draggedNote, i);
 		}
 	}
